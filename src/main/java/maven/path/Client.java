@@ -31,7 +31,8 @@ public class Client extends Methods {
         ObjectInputStream ois = new ObjectInputStream(is);
 
         String response = ois.readUTF();
-        // assigning the response to array
+        // assigning the responses to array of Strings
+        //response 0 = id the rest =numbers to be averaged
         String[] resp = response.split(",");
         String id = resp[0];
         String fg1 = resp[1];
@@ -44,6 +45,7 @@ public class Client extends Methods {
         int figure4 = Integer.parseInt(resp[4]);
         String fg5 = resp[5];
         int figure5 = Integer.parseInt(resp[5]);
+        //to hold the figures
         List<Integer> total = new ArrayList<Integer>();
         //creating a list of int to average
         total.add(figure1);
@@ -60,13 +62,14 @@ public class Client extends Methods {
         oos.writeUTF("nawaz.shss@gmail.com");
         oos.writeFloat(calculations);
 
+        //
         while (ois.available() > 0) {
             String input = ois.readUTF();
-            boolean truth = ois.readBoolean();
-            if (truth = true) {
+            boolean accuracy = ois.readBoolean();
+            if (accuracy = true) {
                 System.out.println("SUCCESSFUL");
                 sock.close();
-            } else if (truth = false) {
+            } else if (accuracy = false) {
                 System.out.println("FAILURE");
                 ois.readUTF();
                 sock.close();
